@@ -1,29 +1,30 @@
 // Building the DOM
 
 // Main variables that will contain the program
-const intro = document.getElementById("intro") // Card One
-const quiz = document.getElementById('quiz'); // Card Two
-const submit = document.getElementById('submit'); // Card Three
-const results = document.getElementById('results'); //Card Four
+const timeClock = document.querySelector(".countdown"); // Timer 
+const quiz = document.getElementById('quiz'); // Quiz Card
+const submit = document.getElementById('submit'); // Submit Card
+const results = document.getElementById('results'); // Results Card
 
-// Intro Card
-const header = document.createElement("h1");
-header.textContent = `JavaScript Quiz`;
+// Main Content
+const h1Title = document.createElement("h1");
+h1Title.setAttribute("class", "title ask-question")
+h1Title.textContent = `JavaScript Quiz`;
 
-const introPara = document.createElement("p");
-introPara.setAttribute("class", "rules");
-introPara.textContent = `Welcome to the JS Coding Quiz! 
+const para = document.createElement("p");
+para.setAttribute("class", "rules seek-answer");
+para.textContent = `Welcome to the JS Coding Quiz! 
 Click 'Start Quiz' to get started. This timed quiz will provide 
 ten questions each with a score of ten points. Take heed, for every 
 wrong answer, 10 seconds will be subtracted from the clock. Good Luck!`
 
-const startBtn = document.createElement("button");
-startBtn.setAttribute("id", "startBtn")
-startBtn.textContent = `START QUIZ`;
+const btn = document.createElement("button");
+btn.setAttribute("id", "btn answer-buttons")
+btn.textContent = `START QUIZ`;
 
-intro.appendChild(header);
-intro.appendChild(introPara);
-intro.appendChild(startBtn);
+quiz.appendChild(h1Title);
+quiz.appendChild(para);
+quiz.appendChild(btn);
 
 
 // Quiz Items
@@ -63,12 +64,26 @@ let timer = 0;
 let qIndex = 0;
 
 
-// Declared Global Variables
+// Start Timer countdown.
+function startTimer() {
+    if (timer === 0) {
+        timer = setInterval(function() {
+            seconds--;
+            timeClock.textContent = `Timer: ${seconds}`;
 
+            if (seconds <= 0) {
+                clearInterval(timer);
+                // gameOver();
+                timeClock.textContent = "GAME OVER";
+            }
+        }, 1000);
+    }
+    startQuiz();
+}
 
+function startQuiz() {
 
-// Functions
-
+}
 
 
 // Executable Functions
