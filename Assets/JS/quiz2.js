@@ -8,7 +8,9 @@ const results = document.getElementById('results'); // Results Card
 
 // Main Content
 const h1Title = document.createElement("h1");
-h1Title.setAttribute("class", "title ask-question")
+const h2Question = document.createElement("h2")
+h1Title.setAttribute("id", "ask-question")
+h1Title.setAttribute("class", "title")
 h1Title.textContent = `JavaScript Quiz`;
 
 const para = document.createElement("p");
@@ -19,21 +21,40 @@ ten questions each with a score of ten points. Take heed, for every
 wrong answer, 10 seconds will be subtracted from the clock. Good Luck!`
 
 const btn = document.createElement("button");
-btn.setAttribute("id", "btn answer-buttons")
+btn.setAttribute("class", "btn answer-buttons")
 btn.textContent = `START QUIZ`;
 
 quiz.appendChild(h1Title);
 quiz.appendChild(para);
 quiz.appendChild(btn);
 
+let button1 = document.createElement("button");
+let button2 = document.createElement("button");
+let button3 = document.createElement("button");
+let button4 = document.createElement("button");
+
+button1.setAttribute("id", "answerButton")
+button2.setAttribute("id", "answerButton")
+button3.setAttribute("id", "answerButton")
+button4.setAttribute("id", "answerButton")
+
+button1.setAttribute("onclick", "checkAnswer()")
+button2.setAttribute("onclick", "checkAnswer()")
+button3.setAttribute("onclick", "checkAnswer()")
+button4.setAttribute("onclick", "checkAnswer()")
+
+let answerButton = document.querySelectorAll("answerButton");
+
+
+let aButtons = [button1, button2, button3, button4];
 
 // Quiz Items
 let quizItems = [
     {
         // See README for cited sources
-        question: "Inside which HTML element do we put the JavaScript?",
+        question: "Inside which HTML tag do we put the JavaScript link?",
         choices: ["<js>", "<scripting>", "<script>", "<javascript>"],
-        answer: "<script>"
+        answer: "script"
     },
     {
         question: "How do you create an expressive function?",
@@ -58,11 +79,11 @@ let quizItems = [
 ];
 
 // Tracking Variables
+let numQuestion = -1;
 let score = 0;
 let seconds = 20;
 let timer = 0;
-let qIndex = 0;
-
+let i = 0;
 
 // Start Timer countdown.
 function startTimer() {
@@ -81,9 +102,39 @@ function startTimer() {
     startQuiz();
 }
 
+// Start Quiz
 function startQuiz() {
+    numQuestion++;
+    quiz.innerHTML = "";
+    let currentQ = quizItems[i].question;
+    let seekAnswer = quizItems[i].choices;
+    quiz.appendChild(h2Question);
+    h2Question.textContent = currentQ;
 
+    for (i = 0; i < seekAnswer.length; i++) {
+        aButtons[i].textContent = seekAnswer[i];
+    }
+    quiz.appendChild(button1);
+    quiz.appendChild(button2);
+    quiz.appendChild(button3);
+    quiz.appendChild(button4);
 }
+
+function checkAnswer() {
+    let answerCheck = quizItems[i].answer;
+    if(answerButton.textContent == answerCheck) {
+        score + 20;
+        next();
+    } else {
+        seconds - 5;
+        para.textContent = "Wrong!"
+    }
+}
+
+
+btn.addEventListener("click", function() {
+    startTimer();
+})
 
 
 // Executable Functions

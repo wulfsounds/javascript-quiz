@@ -48,8 +48,6 @@ p {
     /* height: 30px; */
 }
 
-quizBox
-
 .quizIntro {
     visibility: visible;
 }
@@ -61,5 +59,9 @@ button {
     border: none; 
     width: 200px; 
     height: 25px;
+}
+
+footer {
+    text-align: center;
 }
 
